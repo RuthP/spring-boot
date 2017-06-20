@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by rpalomino on 6/19/2017.
  */
-public interface CarRepository extends JpaRepository<Card,Long> {
+public interface CardRepository extends JpaRepository<Card,Long> {
 }
