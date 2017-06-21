@@ -1,14 +1,12 @@
 package com.dh.project.project.web;
 
 import com.dh.project.project.domain.RegistryCarSold;
-import com.dh.project.project.domain.Seller;
 import com.dh.project.project.service.RegistryCarSoldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by DELL on 20/06/2017.
@@ -35,7 +33,7 @@ public class RegistryCarSoldController {
     }
 
     @RequestMapping(value = "/registries/carsSoldBySeller/{idSeller}",method = RequestMethod.GET)
-    public List<Seller> carsSoldBySeller (@PathVariable Long idSeller){
+    public SellerCardSoldRequestDTO carsSoldBySeller (@PathVariable Long idSeller){
         return registryCarSoldService.carsSoldBySeller(idSeller);
     }
 
@@ -72,6 +70,36 @@ public class RegistryCarSoldController {
 
         public void setIdClient(Long idClient) {
             this.idClient = idClient;
+        }
+    }
+
+    public static class SellerCardSoldRequestDTO{
+        private String name;
+        private String lastName;
+        private int numCarsSold;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public int getNumCarsSold() {
+            return numCarsSold;
+        }
+
+        public void setNumCarsSold(int numCarsSold) {
+            this.numCarsSold = numCarsSold;
         }
     }
 

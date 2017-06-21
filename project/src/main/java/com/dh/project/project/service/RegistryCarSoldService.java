@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by DELL on 20/06/2017.
@@ -48,13 +47,14 @@ public class RegistryCarSoldService {
         registryCarSoldRepository.delete(id);
     }
 
-    public List<Seller> carsSoldBySeller (Long idSeller){
+    public RegistryCarSoldController.SellerCardSoldRequestDTO carsSoldBySeller (Long idSeller){
         Seller seller = sellerRepository.findOne(idSeller);
-        Seller res = new Seller();
+        RegistryCarSoldController.SellerCardSoldRequestDTO res = new RegistryCarSoldController.SellerCardSoldRequestDTO();
+        //Seller res = new Seller();
         res.setName(seller.getName());
         res.setLastName(seller.getLastName());
         res.setNumCarsSold(seller.getNumCarsSold());
-        return (List<Seller>) res;
+        return res;
     }
 
     public void updateRegistry (RegistryCarSoldController.RegistryRequestDTO registryCarSold, Long id){
