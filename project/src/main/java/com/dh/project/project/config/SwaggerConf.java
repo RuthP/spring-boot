@@ -19,7 +19,7 @@ public class SwaggerConf {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.dh.project.project"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())

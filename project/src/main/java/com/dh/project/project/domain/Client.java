@@ -1,9 +1,6 @@
 package com.dh.project.project.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by rpalomino on 6/19/2017.

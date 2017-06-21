@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Created by rpalomino on 6/19/2017.
  */
 @Entity
-public class Card {
+public class Car {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
