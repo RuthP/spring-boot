@@ -1,0 +1,26 @@
+{
+    "status":[
+        {
+            "id":"1",
+            "name":"Eliminar"
+        },
+        {
+            "id":"2",
+            "name":"Editar"
+        },
+        {
+            "id":"3",
+            "name":"No leido"
+        },
+        {
+            "id":"4",
+            "name":"Leido"
+        }
+        
+
+
+    ]
+
+
+
+}

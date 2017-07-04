@@ -1,0 +1,33 @@
+<div class="col-lg-4 col-lg-offset-4">
+    <form class="bg-success" style="margin:0 auto"  ng-controller="chatController">
+        <div class="form-group" align="center">
+            <img src="/img/login.png" class="img-responsive" alt="Responsive image" width="100" height="100">
+        </div-->           
+        <!--div class="form-group">
+            <label for="exampleInputName2">Name</label>
+            <input type="text" ng-model="name" class="form-control" id="exampleInputName2" placeholder="Jane Doe" size="30">
+            <div ng-if="displayMessage" class="alert alert-danger" role="alert">...</div>
+        </div-->
+        <div ng-if="displayMessage" class="alert alert-danger" role="alert">Tiene que llenar todos los datos!</div>    
+        <div class="form-group">
+            <label for="exampleInputEmail2">Email</label>
+            <input type="text" ng-model="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+             
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPasswod">Password</label>
+            <input type="password" ng-model="password" class="form-control" id="exampleInputPasswod" placeholder="">
+        </div>
+        <div class="form-group" align="left">
+            <label>
+            <input type="checkbox"> Remember me
+            </label>
+        </div>
+        <div class="form-group" align="center">
+        <button ng-click="areEmptyFields()" type="button" class="btn btn-success">Login</button>
+        </div>
+        
+        <!--h1>Hi {{ name }} </h1>
+        <h1>Hi {{ 234*2}} </h1-->
+    </form>
+</div>

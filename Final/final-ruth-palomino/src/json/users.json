@@ -1,0 +1,35 @@
+{
+    "users":[
+        {
+            "id":"1",
+            "firstname":"Ruth",
+            "lastname": "Palomino",
+            "username": "rpalomino",
+            "email": "ruth.palomino@dharbor.com",
+            "password": "12345",
+            "status": "Leido"
+        },
+         {
+            "id":"2",
+            "firstname":"Juan",
+            "lastname": "Perez",
+            "username": "juan.perez",
+            "email": "juan.perez@dharbor.com",
+            "password": "54321",
+            "status": "No Leido"
+        },
+        {
+            "id":"3",
+            "firstname":"Lucia",
+            "lastname": "Andia",
+            "username": "lucia_andia",
+            "email": "lu.andia@dharbor.com",
+            "password": "123",
+            "status": "Leido"
+        }
+
+
+
+    ]
+
+}

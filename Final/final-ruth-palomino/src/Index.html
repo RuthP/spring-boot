@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chat">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- bower:css -->
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" />
+        <!-- endbower -->
+        
+        <!-- bower:js -->
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <!-- endbower -->
+
+        <!-- route -->
+
+        
+        
+        <!-- modules -->
+        <script src="modules/chat.module.js"></script>
+        <script src="modules/messageArea.module.js"></script>
+        <script src="modules/userList.module.js"></script>
+        <script src="modules/messageList.module.js"></script>
+        <script src="modules/userItem.module.js"></script>
+        <script src="modules/messageItem.module.js"></script>
+        <script src="app.module.js"></script>
+          
+        <!-- factorys -->
+        <script src="components/user-list/user-list.factory.js"></script>
+        <script src="components/message-list/message-list.factory.js"></script>
+
+        <!-- controllers -->
+        <script src="components/chat/chat.controller.js"></script>
+        <script src="components/message-area/messageArea.controller.js"></script>
+        <script src="components/user-list/userList.controller.js"></script>
+        <script src="components/message-list/messageList.controller.js"></script>
+        <script src="components/user-item/userItem.controller.js"></script>
+        <script src="components/message-item/messageItem.controller.js"></script>
+       
+
+        <!-- directives -->
+        <script src="directives/chat.directive.js"></script>
+        <script src="directives/messageArea.directive.js"></script>
+        <script src="directives/userList.directive.js"></script>
+        <script src="directives/messageList.directive.js"></script>
+        <script src="directives/userItem.directive.js"></script>
+        <script src="directives/messageItem.directive.js"></script>
+
+        <!-- components -->
+        <script src="components/user-item/user-item.component.js"></script>
+        <script src="components/user-list/user-list.component.js"></script>
+        <script src="components/message-item/message-item.component.js"></script>
+        <script src="components/message-list/message-list.component.js"></script>
+        <script src="components/message-area/message-area.component.js"></script>
+        <script src="components/chat/chat.component.js"></script>
+
+        <!-- route -->
+        <script src="app.route.js"></script>
+
+    </head>
+    <body>
+    <br><br>
+    <!--chat></chat-->
+    <ui-view></ui-view>
+    <!--user-list></user-list>
+    <message-list></message-list>
+    <message-area></message-area--> 
+    
+    
+     
+    
+    </div>    
+    </body>
+</html>
+

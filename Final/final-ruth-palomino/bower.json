@@ -1,0 +1,37 @@
+{
+  "name": "Angular",
+  "authors": [
+    "Bhavana Ruth Palomino Pardo <babyta.rpp@gmail.com>"
+  ],
+  "description": "Class1",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "bootstrap": "^3.3.7",
+    "angular": "^1.6.4",
+    "angular-bootstrap": "^2.5.0",
+    "jshint": "^2.9.4",
+    "angular-ui-router": "^1.0.3"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
+    }
+  }
+}
