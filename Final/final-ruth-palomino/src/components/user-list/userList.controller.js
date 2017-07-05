@@ -12,7 +12,8 @@
 
         vm.$onInit = function (){
             vm.users = userService.getUsers().then(function(data){
-                vm.users=data.users;
+                //vm.users=data.users;
+                vm.users=data;
                 console.log("USERS", vm.users);
             });          
         };

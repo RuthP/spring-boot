@@ -16,8 +16,18 @@
 
         ////////////////
         function getUsers() {
-            return loadJSON('/json/users.json');
+            return loadJSON();
          }
+
+         function loadJSON(jsonFile){
+             return $http.get('http://localhost:9090/users').then(function(response){
+                console.log("RESPONSE FROM JSON FILE",response);
+                return response.data;
+
+             },function (error){
+                 console.log("FAIL TO LOAD",error);
+             });
+         }     
 
          function updateUsers(){
              var promises = [updateA(),updateB(),updateC()];
@@ -55,15 +65,6 @@
              //defered.reject('ERROR UPDATING C');
              return promise;
          }
-
-         function loadJSON(jsonFile){
-             return $http.get(jsonFile).then(function(response){
-                //console.log("RESPONSE FROM JSON FILE",response);
-                return response.data;
-
-             },function (error){
-                 console.log("FAIL TO LOAD",error);
-             });
-         }       
+  
     }
 })();
