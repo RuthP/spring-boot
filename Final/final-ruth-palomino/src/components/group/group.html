@@ -4,10 +4,16 @@
         <th>Name Group</th>
         <th>Logo</th> 
         <th>Owner</th>
+        <th><button type="button" class="btn btn-success">Create</button></th>
         </tr>
         <tr ng-repeat="group in $ctrl.groups">
         	<td>{{group.name}}</td>
-        	<td>{{group.name}}</td>
+        	<td>{{group.logo}}</td>
+                <td>{{group.owner.firstName}}{{" "}}{{group.owner.lastName}}</td>
+                <td><button type="button" class="btn btn-primary">See Users</button></td>
+                <td><button type="button" class="btn btn-warning">Edit Group</button></td>
+                <td><button type="button" class="btn btn-danger">Delete Group</button></td>
+                
         </tr>
 </table>
 </div>    

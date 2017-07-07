@@ -15,7 +15,7 @@
             vm.groups = groupService.getGroups().then(function(data){
                 //vm.users=data.users;
                 vm.groups=data;
-                console.log("GROUP", vm.groups[0].name);
+                console.log("GROUP", vm.groups);
             });          
         };
     }
