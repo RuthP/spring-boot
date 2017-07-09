@@ -20,7 +20,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUser(){
-        return userService.getAllUsers();
+        return userService.getAllUsersActive();
     }
 
     @RequestMapping(value = "{id}",method = RequestMethod.GET)

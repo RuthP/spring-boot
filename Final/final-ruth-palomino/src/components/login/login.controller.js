@@ -28,9 +28,9 @@
            $scope.validationUser = false;
 
            for(var x=0; x<vm.users.length; x++) {   
-            $scope.stateUserName = angular.equals($scope.email, vm.users[x].userName);
+            $scope.stateUserName = angular.equals($scope.email, vm.users[x].username);
             $scope.statePassword = angular.equals($scope.password, vm.users[x].password);
-            $scope.userName = vm.users[x].userName;
+            $scope.userName = vm.users[x].username;
             idUser1= vm.users[x].id;
             
 

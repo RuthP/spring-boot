@@ -42,5 +42,14 @@
                  console.log("FAIL TO LOAD",error);
              });
          } 
+
+         function saveGroup (group){
+             return $http.post('http://localhost:9090/groups'+group).then(function(response){
+                 console.log("RESPONSE SAVE HTTP",response);
+                 return response.data;
+             },function (error){
+                 console.log('FAIL TO LOAD',error);
+             });    
+         }
     }
 })();

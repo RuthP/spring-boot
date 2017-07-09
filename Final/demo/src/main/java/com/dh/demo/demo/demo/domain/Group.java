@@ -12,11 +12,19 @@ public class Group {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
+    @JoinColumn(name="owner_id")
     @ManyToOne
     private User owner;
+
+    @Column(name="logo")
     private String logo;
+
+    @Column(name="name")
     private String name;
-    private Date create_date;
+
+    @Column(name="createdate")
+    private Date createdate;
 
     public long getId() {
         return id;
@@ -50,11 +58,11 @@ public class Group {
         this.name = name;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCreatedate() {
+        return createdate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 }

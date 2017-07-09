@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
@@ -25,14 +24,18 @@ public class GroupService {
     @Autowired
     private UserRepository userRepository;
 
-    @PersistenceContext()
+    @PersistenceContext
     private EntityManager entityManager;
 
     public  List<Group> getGroupByUser (Long id){
-        /*Query query = entityManager.createQuery("select * from Group g where g.ownerId=:id")
-                .setParameter("id", id);
-        List<Object[]> result = query.getResultList();*/
-        return null;
+        String hql="select g from Group g where  g.owner_id =  "+id+"";
+        List<Group>groups=entityManager.createQuery(hql).getResultList();
+        return groups;
+    }
+
+    public Group getGroup (Long id){
+        Group group = groupRepository.findOne(id);
+        return group;
     }
 
     public List<Group> getAllGroups(){
@@ -43,7 +46,7 @@ public class GroupService {
         User user = userRepository.findOne(group.getOwnerId());
         Group res = new Group();
         res.setName(group.getName());
-        res.setCreate_date(group.getCreate_date());
+        res.setCreatedate(group.getCreate_date());
         res.setLogo(group.getLogo());
         res.setOwner(user);
         groupRepository.save(res);
@@ -57,7 +60,7 @@ public class GroupService {
         Group group1 = new Group();
         User user = userRepository.findOne(group.getOwnerId());
         group1.setLogo(group.getLogo());
-        group1.setCreate_date(group.getCreate_date());
+        group1.setCreatedate(group.getCreate_date());
         group1.setName(group.getName());
         group1.setOwner(user);
         return group1;

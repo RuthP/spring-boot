@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -28,13 +27,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getAllUsersActive(){
+        String hql="select u from User u where u.status='Active'";
+        List<User>users=entityManager.createQuery(hql).getResultList();
+        return users;
+    }
+
     public void  addUser(UserController.UserRequestDTO user){
         User res = new User();
-        res.setFirstName(user.getFirstName());
-        res.setLastName(user.getLastName());
+        res.setFirstname(user.getFirstName());
+        res.setLastname(user.getLastName());
         res.setEmail(user.getEmail());
         res.setPassword(user.getPassword());
-        res.setUserName(user.getUserName());
+        res.setUsername(user.getUserName());
         res.setStatus(user.getStatus());
         userRepository.save(res);
     }
@@ -47,11 +52,11 @@ public class UserService {
 
     public User updateUser(Long id, UserController.UserRequestDTO user){
         User user1 = userRepository.findOne(id);
-        user1.setFirstName(user.getFirstName());
-        user1.setLastName(user.getLastName());
+        user1.setFirstname(user.getFirstName());
+        user1.setLastname(user.getLastName());
         user1.setEmail(user.getEmail());
         user1.setStatus(user.getStatus());
-        user1.setUserName(user.getUserName());
+        user1.setUsername(user.getUserName());
         user1.setPassword(user.getPassword());
         User res = userRepository.save(user1);
         return res;

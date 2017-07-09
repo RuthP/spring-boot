@@ -3,33 +3,34 @@
 <header class="panel-heading">Group Form</header>
 <div ng-controller= "groupController as $ctrl">
    <br>
-      <div ng-if="$ctrl.enable=='0'">
-        <form>             
+      <div ng-if="$ctrl.enable=='0'"> 
+        <form ng-submit="$ctrl.save()">
+                <div ng-if="displayMessage" class="alert alert-danger" role="alert">Tiene que llenar todos los datos!</div>             
                 <div class="form-group">
                 <label for="groupName">Group Name</label>
-                <input type="text" ng-model="groupName" class="form-control" id="groupName" placeholder="name">
+                <input type="text" ng-model="$ctrl.groupName" class="form-control" id="groupName" placeholder="name">
                 </div>
                 <div class="form-group">
                 <label for="groupLogo">Group Logo</label>
-                <input type="text" ng-model="groupLogo" class="form-control" id="groupLogo" placeholder="link">
+                <input type="text" ng-model="$ctrl.groupLogo" class="form-control" id="groupLogo" placeholder="link">
                 </div>
                 <div class="form-group">
-                <button type="submit" class="btn btn-success">Save</button>
+                <button ng-click="areEmptyFields()" type="submit" class="btn btn-success">Save</button>
                 </div>
         </form>
     </div>
 
       <div ng-if="$ctrl.enable=='1'">
-        <form>
+        <form ng-submit="$ctrl.updateGroup()">
           <div >
-          <input type="text"  ng-model="student.idStudent" ng-model-options="{ updateOn: '{{student.studentEdit.id}}' }" class="form-control">
+          <input  type="hidden"  ng-model="$ctrl.idGroup" ng-model-options="{ updateOn: '{{$ctrl.groupEdit.id}}' }" class="form-control">
           <div class="form-group">
-            <label for="studentName">Edit Student Name</label>
-            <input type="text" ng-value="'{{student.studentEdit.nameStudent}}'" ng-model="student.editNameStudent" class="form-control" id="editStudentName">
+            <label for="groupName">Edit Group Name</label>
+            <input type="text" ng-value="'{{$ctrl.groupEdit.name}}'" ng-model="$ctrl.editName" class="form-control" id="editName">
           </div>
           <div class="form-group">
-            <label for="birthDate">Edit Student BirthDate</label>
-            <input type="date" ng-value="'{{student.studentEdit.birthDate | date: 'yyyy-MM-dd'}}'" ng-model="student.editBirthDate" class="form-control" id="editBirthDate">
+            <label for="logo">Edit Group Logo</label>
+            <input type="text" ng-value="'{{$ctrl.groupEdit.logo}}'" ng-model="$ctrl.editLogo" class="form-control" id="editLogo">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success">Update</button>
@@ -37,47 +38,8 @@
           </div>
         </form>
       </div>
-      <div ng-if="$ctrl.enable=='3'">
-        <form>
-          <div class="form-user">
-                <label for="userName">First Name</label>
-                <input type="text" ng-model="userName" class="form-control" id="userName" placeholder="name">
-                </div>
-                <div class="form-user">
-                <label for="lastName">Last Name</label>
-                <input type="text" ng-model="lastName" class="form-control" id="lastName" placeholder="last name">
-                </div><div class="form-user">
-                <label for="userEmail">Email</label>
-                <input type="email" ng-model="userEmail" class="form-control" id="userEmail" placeholder="last name">
-                </div>
-                <div class="form-user">
-                <label for="lastName">Group Logo</label>
-                <input type="text" ng-model="lastName" class="form-control" id="lastName" placeholder="last name">
-                </div>
-                <div class="form-user">
-                <button type="submit" class="btn btn-success">Save</button>
-                </div>
-        </form>
-      </div> 
-      <div ng-if="$ctrl.enable=='4'">
-        <form>
-          <div >
-          <input type="text"  ng-model="student.idStudent" ng-model-options="{ updateOn: '{{student.studentEdit.id}}' }" class="form-control">
-          <div class="form-group">
-            <label for="studentName">Edit Student Name</label>
-            <input type="text" ng-value="'{{student.studentEdit.nameStudent}}'" ng-model="student.editNameStudent" class="form-control" id="editStudentName">
-          </div>
-          <div class="form-group">
-            <label for="birthDate">Edit Student BirthDate</label>
-            <input type="date" ng-value="'{{student.studentEdit.birthDate | date: 'yyyy-MM-dd'}}'" ng-model="student.editBirthDate" class="form-control" id="editBirthDate">
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-success">Update</button>
-          </div>
-          </div>
-        </form>
-      </div>      
-<h3>Group List</h3>
+  
+        <h3>Group List</h3>
         <div class="form-group">
                 <select name="cars">
                 <option value="volvo">User1</option>
@@ -99,10 +61,10 @@
                 <tr ng-repeat="group in $ctrl.groups">
                 <td>{{group.name}}</td>
                 <td>{{group.logo}}</td>
-                <td>{{group.owner.firstName}}{{" "}}{{group.owner.lastName}}</td>
+                <td>{{group.owner.firstname}}{{" "}}{{group.owner.lastname}}</td>
                 <td><button type="submit" class="btn btn-primary">See Users</button></td>
-                <td><button type="submit" class="btn btn-warning">Edit Group</button></td>
-                <td><button type="submit" class="btn btn-danger">Delete Group</button></td>               
+                <td><button type="submit" class="btn btn-warning" ng-click="$ctrl.getGroup(group.id)">Edit Group</button></td>
+                <td><button type="submit" class="btn btn-danger"  ng-click="$ctrl.deleteGroup(group.id)">Delete Group</button></td>               
                 </tr>
         </tbody>        
         </table>

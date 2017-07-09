@@ -25,8 +25,12 @@ public class GroupController {
 
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     public List<Group> getGroupByUser (@PathVariable Long id){
-        return null;
-        //return groupService.getGroupByUser(id);
+        return groupService.getGroupByUser(id);
+    }
+
+    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    public Group getGroup (@PathVariable Long id){
+        return groupService.getGroup(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
