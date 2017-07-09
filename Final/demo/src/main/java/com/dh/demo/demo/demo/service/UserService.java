@@ -5,6 +5,10 @@ import com.dh.demo.demo.demo.repository.UserRepository;
 import com.dh.demo.demo.demo.web.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -15,11 +19,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "manager1");
-    //EntityManager entitymanager = emfactory.createEntityManager();
+    @PersistenceContext()
+    private EntityManager entityManager;
 
     public List<User> getAllUsers(){
-        //Query query = entitymanager.createQuery("select * from User u where u.status='Active'");
+        //Query query = entityManager.createQuery("select * from User u where u.status='Active'");
         //List<Object[]> result = query.getResultList();
         return userRepository.findAll();
     }

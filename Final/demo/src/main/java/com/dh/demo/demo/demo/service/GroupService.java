@@ -8,6 +8,10 @@ import com.dh.demo.demo.demo.web.GroupController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -20,6 +24,16 @@ public class GroupService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @PersistenceContext()
+    private EntityManager entityManager;
+
+    public  List<Group> getGroupByUser (Long id){
+        /*Query query = entityManager.createQuery("select * from Group g where g.ownerId=:id")
+                .setParameter("id", id);
+        List<Object[]> result = query.getResultList();*/
+        return null;
+    }
 
     public List<Group> getAllGroups(){
         return groupRepository.findAll();

@@ -23,18 +23,24 @@ public class GroupController {
         return groupService.getAllGroups();
     }
 
+    @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
+    public List<Group> getGroupByUser (@PathVariable Long id){
+        return null;
+        //return groupService.getGroupByUser(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void addGroup(@RequestBody GroupRequestDTO group){
         groupService.addGroup(group);
     }
 
     @RequestMapping(value = "/deleteGroup/{id}",method = RequestMethod.DELETE)
-    public void deleteGroup (@RequestParam Long id){
+    public void deleteGroup (@PathVariable Long id){
         groupService.deleteGroup(id);
     }
 
     @RequestMapping(value = "/updateGroup/{id}",method = RequestMethod.PUT)
-    public Group updateGroup (@RequestParam Long id, @RequestBody GroupRequestDTO group){
+    public Group updateGroup (@PathVariable Long id, @RequestBody GroupRequestDTO group){
         return groupService.updateGroup(id, group);
     }
 
