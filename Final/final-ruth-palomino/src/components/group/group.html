@@ -1,10 +1,123 @@
+<div>
+<article class="panel panel-info">
+<header class="panel-heading">Group Form</header>
 <div ng-controller= "groupController as $ctrl">
+   <br>
+      <div ng-if="$ctrl.enable=='0'">
+        <form>             
+                <div class="form-group">
+                <label for="groupName">Group Name</label>
+                <input type="text" ng-model="groupName" class="form-control" id="groupName" placeholder="name">
+                </div>
+                <div class="form-group">
+                <label for="groupLogo">Group Logo</label>
+                <input type="text" ng-model="groupLogo" class="form-control" id="groupLogo" placeholder="link">
+                </div>
+                <div class="form-group">
+                <button type="submit" class="btn btn-success">Save</button>
+                </div>
+        </form>
+    </div>
+
+      <div ng-if="$ctrl.enable=='1'">
+        <form>
+          <div >
+          <input type="text"  ng-model="student.idStudent" ng-model-options="{ updateOn: '{{student.studentEdit.id}}' }" class="form-control">
+          <div class="form-group">
+            <label for="studentName">Edit Student Name</label>
+            <input type="text" ng-value="'{{student.studentEdit.nameStudent}}'" ng-model="student.editNameStudent" class="form-control" id="editStudentName">
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Edit Student BirthDate</label>
+            <input type="date" ng-value="'{{student.studentEdit.birthDate | date: 'yyyy-MM-dd'}}'" ng-model="student.editBirthDate" class="form-control" id="editBirthDate">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Update</button>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div ng-if="$ctrl.enable=='3'">
+        <form>
+          <div class="form-user">
+                <label for="userName">First Name</label>
+                <input type="text" ng-model="userName" class="form-control" id="userName" placeholder="name">
+                </div>
+                <div class="form-user">
+                <label for="lastName">Last Name</label>
+                <input type="text" ng-model="lastName" class="form-control" id="lastName" placeholder="last name">
+                </div><div class="form-user">
+                <label for="userEmail">Email</label>
+                <input type="email" ng-model="userEmail" class="form-control" id="userEmail" placeholder="last name">
+                </div>
+                <div class="form-user">
+                <label for="lastName">Group Logo</label>
+                <input type="text" ng-model="lastName" class="form-control" id="lastName" placeholder="last name">
+                </div>
+                <div class="form-user">
+                <button type="submit" class="btn btn-success">Save</button>
+                </div>
+        </form>
+      </div> 
+      <div ng-if="$ctrl.enable=='4'">
+        <form>
+          <div >
+          <input type="text"  ng-model="student.idStudent" ng-model-options="{ updateOn: '{{student.studentEdit.id}}' }" class="form-control">
+          <div class="form-group">
+            <label for="studentName">Edit Student Name</label>
+            <input type="text" ng-value="'{{student.studentEdit.nameStudent}}'" ng-model="student.editNameStudent" class="form-control" id="editStudentName">
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Edit Student BirthDate</label>
+            <input type="date" ng-value="'{{student.studentEdit.birthDate | date: 'yyyy-MM-dd'}}'" ng-model="student.editBirthDate" class="form-control" id="editBirthDate">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Update</button>
+          </div>
+          </div>
+        </form>
+      </div>      
+<h3>Group List</h3>
+        <div class="form-group">
+                <select name="cars">
+                <option value="volvo">User1</option>
+                <option value="volvo">User2</option>
+                <option value="volvo">User3</option>
+                </select>
+                <button type="submit" class="btn btn-success">Add Users</button>
+        </div>
+        <table class="table table-condensed" >
+        <thead>     
+                <tr>
+                <th>Name Group</th>
+                <th>Logo</th> 
+                <th>Owner</th>
+                <th></th>
+                </tr>
+        </thead>
+        <tbody>
+                <tr ng-repeat="group in $ctrl.groups">
+                <td>{{group.name}}</td>
+                <td>{{group.logo}}</td>
+                <td>{{group.owner.firstName}}{{" "}}{{group.owner.lastName}}</td>
+                <td><button type="submit" class="btn btn-primary">See Users</button></td>
+                <td><button type="submit" class="btn btn-warning">Edit Group</button></td>
+                <td><button type="submit" class="btn btn-danger">Delete Group</button></td>               
+                </tr>
+        </tbody>        
+        </table>
+</div>
+</article>
+</div>
+<!--h1>USER LIST BY GROUP</h1>
+<button type="button" class="btn btn-success">Create Group</button>
 <table class="table table-condensed" >
         <tr>
-        <th>Name Group</th>
-        <th>Logo</th> 
-        <th>Owner</th>
-        <th><button type="button" class="btn btn-success">Create</button></th>
+        <th>First Name</th>
+        <th>Last Name</th> 
+        <th>Email</th>
+        <th>User Name</th>
+        <th></th>
         </tr>
         <tr ng-repeat="group in $ctrl.groups">
         	<td>{{group.name}}</td>
@@ -16,4 +129,4 @@
                 
         </tr>
 </table>
-</div>    
+</div-->    

@@ -4,9 +4,7 @@ import com.dh.demo.demo.demo.domain.User;
 import com.dh.demo.demo.demo.repository.UserRepository;
 import com.dh.demo.demo.demo.web.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -17,9 +15,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Query("SELECT * FROM User WHERE status<>'Remove")
-    public List<User> getAllUsers(){
+    //EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "manager1");
+    //EntityManager entitymanager = emfactory.createEntityManager();
 
+    public List<User> getAllUsers(){
+        //Query query = entitymanager.createQuery("select * from User u where u.status='Active'");
+        //List<Object[]> result = query.getResultList();
         return userRepository.findAll();
     }
 
@@ -50,5 +51,10 @@ public class UserService {
         user1.setPassword(user.getPassword());
         User res = userRepository.save(user1);
         return res;
+    }
+
+    public User getUser(Long id){
+        User user = userRepository.findOne(id);
+        return user;
     }
 }

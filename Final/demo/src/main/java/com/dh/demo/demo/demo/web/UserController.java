@@ -23,17 +23,22 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    public User getUser(@PathVariable Long id){
+        return userService.getUser(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void addUser(@RequestBody UserRequestDTO user){
         userService.addUser(user);
     }
     @RequestMapping(value = "/deleteUser/{id}",method = RequestMethod.DELETE)
-    public void deleteUser (@RequestParam Long id){
+    public void deleteUser (@PathVariable Long id){
         userService.deleteUser(id);
     }
 
     @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
-    public User updateUser (@RequestParam Long id,@RequestBody UserRequestDTO user ){
+    public User updateUser (@PathVariable Long id,@RequestBody UserRequestDTO user ){
         return userService.updateUser(id,user);
     }
 

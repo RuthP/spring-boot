@@ -15,6 +15,15 @@
         .state('chat',{
             url:'/chat',
             templateUrl:'components/chat/chat.html'
+        })
+        
+        .state('group',{
+            url:'/group',
+            params:{
+                idUser:null
+            },
+            templateUrl:'components/group/group.html',
+            controller: 'groupController'
         });
 
     });
