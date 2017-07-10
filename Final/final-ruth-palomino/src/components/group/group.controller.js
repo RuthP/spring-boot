@@ -35,7 +35,8 @@
             
             return $http.post('http://localhost:9090/groups',group).then(function(response){
                  //console.log("RESPONSE SAVE HTTP",response);
-                 vm.groups = groupService.getGroups().then(function(data){
+                 var id = vm.idUser;
+                 vm.groups = groupService.getGroups(id).then(function(data){
                  vm.groups=data;
                  console.log("GROUP", vm.groups);
                  });
@@ -71,8 +72,9 @@
         vm.deleteGroup = function(id){
             //alert(id);
             return $http.delete("http://localhost:9090/groups/deleteGroup/"+id).then(function(response){
-                console.log("DELETE",response);
-                 vm.groups = groupService.getGroups().then(function(data){
+                 console.log("DELETE",response);
+                 var id = vm.idUser;
+                 vm.groups = groupService.getGroups(id).then(function(data){
                  vm.groups=data;
                  console.log("GROUP", vm.groups);
                  });
@@ -81,7 +83,8 @@
             });
         };
         vm.$onInit = function (){
-            vm.groups = groupService.getGroups().then(function(data){
+            var id = vm.idUser;
+            vm.groups = groupService.getGroups(id).then(function(data){
                 //vm.users=data.users;
                 vm.groups=data;
                 console.log("GROUP", vm.groups);

@@ -14,8 +14,8 @@
         return service;
 
         ////////////////
-        function getGroups() {
-            return loadJSON();
+        function getGroups(id) {
+            return loadJSON(id);
          }
 
          function getUserGroup(id){
@@ -33,8 +33,8 @@
              });
          }
 
-         function loadJSON(jsonFile){
-             return $http.get('http://localhost:9090/groups').then(function(response){
+         function loadJSON(id){
+             return $http.get('http://localhost:9090/groups/user/'+id).then(function(response){
                 console.log("RESPONSE FROM JSON FILE GROUP",response);
                 return response.data;
 

@@ -28,7 +28,7 @@ public class GroupService {
     private EntityManager entityManager;
 
     public  List<Group> getGroupByUser (Long id){
-        String hql="select g from Group g where  g.ownerid =  "+id+"";
+        String hql="select g from Group g where  g.owner =  "+id+"";
         List<Group>groups=entityManager.createQuery(hql).getResultList();
         return groups;
     }
