@@ -13,8 +13,9 @@ public class Group {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    @JoinColumn(name="owner_id")
+
     @ManyToOne
+    @JoinColumn(name="ownerid")
     private User owner;
 
     @Column(name="logo")
