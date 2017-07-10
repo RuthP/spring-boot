@@ -23,14 +23,14 @@
       <div ng-if="$ctrl.enable=='1'">
         <form ng-submit="$ctrl.updateGroup()">
           <div >
-          <input  type="hidden"  ng-model="$ctrl.idGroup" ng-model-options="{ updateOn: '{{$ctrl.groupEdit.id}}' }" class="form-control">
+          <input  type="hidden"  ng-model="$ctrl.groupEdit.id" ng-model-options="{ updateOn: '{{$ctrl.groupEdit.id}}' }" class="form-control">
           <div class="form-group">
             <label for="groupName">Edit Group Name</label>
-            <input type="text" ng-value="'{{$ctrl.groupEdit.name}}'" ng-model="$ctrl.editName" class="form-control" id="editName">
+            <input type="text" ng-value="'{{$ctrl.groupEdit.name}}'" ng-model="$ctrl.groupEdit.name" class="form-control" id="editName">
           </div>
           <div class="form-group">
             <label for="logo">Edit Group Logo</label>
-            <input type="text" ng-value="'{{$ctrl.groupEdit.logo}}'" ng-model="$ctrl.editLogo" class="form-control" id="editLogo">
+            <input type="text" ng-value="'{{$ctrl.groupEdit.logo}}'" ng-model="$ctrl.groupEdit.logo" class="form-control" id="editLogo">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success">Update</button>

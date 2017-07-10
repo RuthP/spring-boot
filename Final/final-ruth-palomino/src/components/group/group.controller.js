@@ -10,7 +10,8 @@
         var vm = this;
         vm.groups = [];
         vm.user = [];
-        vm.idUser = $state.params.idUser;
+        vm.idUser = localStorage.getItem("IdUser");
+        //localStorage.clear(); //Para borrar datos
         vm.groupEdit = null;
         console.log("IDINGROUP",vm.idUser);
         vm.enable="0";
@@ -58,12 +59,13 @@
         };
 
         vm.updateGroup = function(){
-            var id = vm.idGroup;
-            alert("id",id);
+            var id = vm.groupEdit.id;
+            console.log(vm.groupEdit.name);
+            //alert("id",id);
             var group = {
                 createdate:new Date(),
-                logo : vm.editName,
-                name : vm.editLogo,
+                logo : vm.groupEdit.name,
+                name : vm.groupEdit.logo,
                 ownerId : vm.idUser
             };
             console.log("UPDATE",group);

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -28,7 +27,9 @@ public class GroupService {
     private EntityManager entityManager;
 
     public  List<Group> getGroupByUser (Long id){
-        String hql="select g from Group g where  g.owner =  "+id+"";
+        //String hql="select g from Group g where  g.owner =  "+id+"";
+        String hql="select distinct g from Group g , User u, GroupUser gu where g.id=gu.group and u.id=gu.user " +
+                "and (u.id =  "+id+" or g.owner =  "+id+")";
         List<Group>groups=entityManager.createQuery(hql).getResultList();
         return groups;
     }

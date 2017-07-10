@@ -10,9 +10,12 @@ public class GroupUser {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
     @ManyToOne
+    @JoinColumn(name="groupid")
     private Group group;
     @ManyToOne
+    @JoinColumn(name="userid")
     private User user;
 
     public long getId() {
