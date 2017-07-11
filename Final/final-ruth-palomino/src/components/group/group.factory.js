@@ -9,12 +9,28 @@
     function GroupService($http,$q) {
         var service = {
             getGroupsByUser:getGroupsByUser,
-            getGroupsByOwner:getGroupsByOwner
+            getGroupsByOwner:getGroupsByOwner,
+            getGroups:getGroups
         };
         
         return service;
 
-        ////////////////
+        function getGroups(id){
+            return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
+                //var owner =valueOf(data);
+                //vm.owner=data.data;
+                if(response.data===false){
+                    console.log("FALSE","0");
+                    return getGroupsByUser(id);  
+                }else {
+                    console.log("TRUE","1"); 
+                    return getGroupsByOwner(id);
+                }
+            }, function error(response) {
+            console.log('ERROR GROUPS', response);
+            });
+        }
+
         function getGroupsByUser(id) {
             return user(id);
          }

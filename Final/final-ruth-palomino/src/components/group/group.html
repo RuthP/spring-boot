@@ -63,6 +63,31 @@
                 </div>
         </form>
        </div>
+
+       <div ng-if="$ctrl.enable=='4'"> 
+        <form ng-submit="$ctrl.()">
+          
+                <div class="form-user">
+                <label for="firstName">First Name</label>
+                <input type="text" ng-model="$ctrl.fisrtName" class="form-control" id="fisrtName" placeholder="firts name">
+                </div>
+                <div class="form-user">
+                <label for="lastName">Last Name</label>
+                <input type="text" ng-model="$ctrl.lastName" class="form-control" id="lastName" placeholder="last name">
+                </div>
+                <div class="form-user">
+                <label for="email">Email</label>
+                <input type="email" ng-model="$ctrl.email" class="form-control" id="email" placeholder="">
+                </div>
+                <div class="form-user">
+                <label for="userName">User Name</label>
+                <input type="text" ng-model="$ctrl.userName" class="form-control" id="userName" placeholder="">
+                </div>
+                <div class="form-user">
+                <button ng-click="areEmptyFields()" type="submit" class="btn btn-success">Save</button>
+                </div>
+        </form>
+       </div>
   
         <h3>Group List</h3>
         <div class="form-group">
@@ -101,10 +126,10 @@
         <table class="table table-condensed" >
         <thead>     
                 <tr>
-                <th>Name Group</th>
-                <th>Logo</th> 
-                <th>Owner</th>
-                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th> 
+                <th>Email</th>
+                <th>User Name</th>
                 </tr>
         </thead>
         <tbody>

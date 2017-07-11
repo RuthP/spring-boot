@@ -40,7 +40,7 @@
                  var id = vm.idUser;
                  vm.groups = groupService.getGroups(id).then(function(data){
                  vm.groups=data;
-                 //console.log("GROUP", vm.groups);
+                 console.log("GROUPS SAVE",vm.groups);
                  });
                  return response.data;
              },function (error){
@@ -75,7 +75,7 @@
               var id = vm.idUser;
               vm.groups = groupService.getGroups(id).then(function(data){
               vm.groups=data;
-              console.log("GROUP", vm.groups);
+              console.log("GROUPS UPDATE",vm.groups);
               });
               vm.enable="0";
             },function error(response){
@@ -89,8 +89,8 @@
                  var id = vm.idUser;
                  vm.groups = groupService.getGroups(id).then(function(data){
                  vm.groups=data;
-                 console.log("GROUP", vm.groups);
-                 });
+                 console.log("GROUPS DELETE",vm.groups);
+            });
             }, function error(response) {
                  console.log('ERROR DELETE GROUP', response);
             });
@@ -100,33 +100,10 @@
         }
         vm.$onInit = function (){
             var id = vm.idUser;
-            return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
-                //var owner =valueOf(data);
-                //vm.owner=data.data;
-                if(response.data===false){
-                    console.log("FALSE","0");    
-                    vm.groups = groupService.getGroupsByUser(id).then(function(data){
-                    //vm.users=data.users;
-                    vm.groups=data;
-                    console.log("GROUP", vm.groups);
-                    });
-                }else {
-                    console.log("TRUE","1"); 
-                    vm.groups = groupService.getGroupsByOwner(id).then(function(data){
-                    //vm.users=data.users;
-                    vm.groups=data;
-                    console.log("GROUP", vm.groups);
-                    });
-                }
-                console.log("OWNER",response.data);
-            }, function error(response) {
-            console.log('ERROR GROUPS', response);
+            vm.groups = groupService.getGroups(id).then(function(data){
+                vm.groups=data;
+                console.log("GROUPSS",vm.groups);
             });
-            
-           /* vm.user = groupService.getUserGroup(vm.idUser).then(function(data){
-                vm.user=data;
-                console.log("USER",vm.user);
-            });*/
         };
             
     }

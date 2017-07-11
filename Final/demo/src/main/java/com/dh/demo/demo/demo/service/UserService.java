@@ -35,7 +35,7 @@ public class UserService {
 
     public List<User> getUsersByGroup(Long id){
         String hql="select u from Group g , User u, GroupUser gu where g.id=gu.group and u.id=gu.user " +
-                "and g.id =  "+id+" u.status='Active'";
+                "and g.id =  "+id+" and u.status='Active'";
         List<User>users=entityManager.createQuery(hql).getResultList();
         return users;
     }
