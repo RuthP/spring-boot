@@ -95,6 +95,9 @@
                  console.log('ERROR DELETE GROUP', response);
             });
         };
+        vm.seeUsers = function(id){
+            return $http.get("")
+        }
         vm.$onInit = function (){
             var id = vm.idUser;
             return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
