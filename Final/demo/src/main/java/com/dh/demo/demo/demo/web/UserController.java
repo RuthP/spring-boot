@@ -23,6 +23,11 @@ public class UserController {
         return userService.getAllUsersActive();
     }
 
+    @RequestMapping(value = "/Group/{id}",method = RequestMethod.GET)
+    public List<User> getUsersByGroup (@PathVariable Long id){
+        return userService.getUsersByGroup(id);
+    }
+
     @RequestMapping(value = "{id}",method = RequestMethod.GET)
     public User getUser(@PathVariable Long id){
         return userService.getUser(id);

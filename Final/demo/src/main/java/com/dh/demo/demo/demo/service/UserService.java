@@ -33,6 +33,13 @@ public class UserService {
         return users;
     }
 
+    public List<User> getUsersByGroup(Long id){
+        String hql="select u from Group g , User u, GroupUser gu where g.id=gu.group and u.id=gu.user " +
+                "and g.id =  "+id+" u.status='Active'";
+        List<User>users=entityManager.createQuery(hql).getResultList();
+        return users;
+    }
+
     public void  addUser(UserController.UserRequestDTO user){
         User res = new User();
         res.setFirstname(user.getFirstName());

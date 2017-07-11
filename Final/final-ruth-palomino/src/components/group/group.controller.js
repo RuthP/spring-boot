@@ -14,7 +14,8 @@
         //localStorage.clear(); //Para borrar datos
         vm.groupEdit = null;
         console.log("IDINGROUP",vm.idUser);
-        vm.enable="0";
+        vm.enable = "0";
+        vm.enableTable = "0";
         $scope.displayMessage = false;
 
         $scope.areEmptyFields = function(){
@@ -26,7 +27,7 @@
         };
         vm.save = function(){
              var group = {
-                create_date:new Date(),
+                createdate:new Date(),
                 //create_date:"2017-07-09T14:58:39.990Z",
                 logo : vm.groupLogo, 
                 name : vm.groupName,             
@@ -39,7 +40,7 @@
                  var id = vm.idUser;
                  vm.groups = groupService.getGroups(id).then(function(data){
                  vm.groups=data;
-                 console.log("GROUP", vm.groups);
+                 //console.log("GROUP", vm.groups);
                  });
                  return response.data;
              },function (error){
@@ -50,7 +51,7 @@
         };
         vm.getGroup = function(id){
             return $http.get("http://localhost:9090/groups/"+id).then(function(response){
-                console.log("RESPONSE UPDATE HTTP",response);
+                //console.log("RESPONSE UPDATE HTTP",response);
                 vm.groupEdit=response.data;
                 vm.enable="1";
             }, function error(response) {
@@ -60,8 +61,8 @@
 
         vm.updateGroup = function(){
             var id = vm.groupEdit.id;
-            console.log(vm.groupEdit.name);
-            //alert("id",id);
+            //console.log("IDDD",vm.groupEdit.id);
+           // alert("id",id);
             var group = {
                 createdate:new Date(),
                 logo : vm.groupEdit.name,
@@ -69,7 +70,17 @@
                 ownerId : vm.idUser
             };
             console.log("UPDATE",group);
-
+            return $http.put("http://localhost:9090/groups/updateGroup/"+id,group).then(function(response){
+              console.log("UPDATE",response);
+              var id = vm.idUser;
+              vm.groups = groupService.getGroups(id).then(function(data){
+              vm.groups=data;
+              console.log("GROUP", vm.groups);
+              });
+              vm.enable="0";
+            },function error(response){
+              console.log("ERROR",response);       
+            });
         };
         vm.deleteGroup = function(id){
             //alert(id);
@@ -86,11 +97,29 @@
         };
         vm.$onInit = function (){
             var id = vm.idUser;
-            vm.groups = groupService.getGroups(id).then(function(data){
-                //vm.users=data.users;
-                vm.groups=data;
-                console.log("GROUP", vm.groups);
+            return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
+                //var owner =valueOf(data);
+                //vm.owner=data.data;
+                if(response.data===false){
+                    console.log("FALSE","0");    
+                    vm.groups = groupService.getGroupsByUser(id).then(function(data){
+                    //vm.users=data.users;
+                    vm.groups=data;
+                    console.log("GROUP", vm.groups);
+                    });
+                }else {
+                    console.log("TRUE","1"); 
+                    vm.groups = groupService.getGroupsByOwner(id).then(function(data){
+                    //vm.users=data.users;
+                    vm.groups=data;
+                    console.log("GROUP", vm.groups);
+                    });
+                }
+                console.log("OWNER",response.data);
+            }, function error(response) {
+            console.log('ERROR GROUPS', response);
             });
+            
            /* vm.user = groupService.getUserGroup(vm.idUser).then(function(data){
                 vm.user=data;
                 console.log("USER",vm.user);

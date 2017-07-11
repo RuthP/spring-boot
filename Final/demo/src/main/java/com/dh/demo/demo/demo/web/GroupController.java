@@ -28,6 +28,21 @@ public class GroupController {
         return groupService.getGroupByUser(id);
     }
 
+    @RequestMapping(value = "/owner/{id}",method = RequestMethod.GET)
+    public List<Group> getGroupByOwner (@PathVariable Long id){
+        return groupService.getGroupByOwner(id);
+    }
+
+    @RequestMapping(value = "/isOwner/{id}",method = RequestMethod.GET)
+    public Boolean isOwner (@PathVariable long id){
+        return groupService.isOwner(id);
+    }
+
+    @RequestMapping(value = "/makeOwner/{idUser}/{idGroup}",method = RequestMethod.GET)
+    public void makeOwner (@PathVariable long idUser,@PathVariable Long idGroup ){
+        groupService.makeOwner(idUser,idGroup);
+    }
+
     @RequestMapping(value = "{id}",method = RequestMethod.GET)
     public Group getGroup (@PathVariable Long id){
         return groupService.getGroup(id);

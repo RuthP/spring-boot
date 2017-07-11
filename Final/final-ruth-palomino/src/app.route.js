@@ -22,8 +22,8 @@
             params:{
                 idUser:null
             },
-            templateUrl:'components/group/group.html',
-            controller: 'groupController'
+            templateUrl:'components/group/group.html'
+            //controller: 'groupController'
         });
 
     });
