@@ -10,10 +10,21 @@
         var service = {
             getGroupsByUser:getGroupsByUser,
             getGroupsByOwner:getGroupsByOwner,
-            getGroups:getGroups
+            getGroups:getGroups,
+            getUsersGroup:getUsersGroup,
+            saveGroupUser:saveGroupUser,
+            getMaxUser:getMaxUser
         };
         
         return service;
+
+        function getMaxUser(){
+            return $http.get("http://localhost:9090/users/maxId").then(function(response){
+                return response.data;
+            },function (error){
+                 console.log("FAIL TO LOAD",error);
+             });
+         }
 
         function getGroups(id){
             return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
@@ -39,16 +50,24 @@
             return owner(id);
          }
 
-         function getUserGroup(id){
+         function getUsersGroup(id){
              console.log("iddd",id);
              return getUser(id);
          }
 
          function getUser(id){
              console.log("ID",id);
-             return $http.get('http://localhost:9090/users/'+id).then(function(response){
+             return $http.get('http://localhost:9090/users/group/'+id).then(function(response){
                  console.log("User by groups",response);
                  return response.data;
+             },function (error){
+                 console.log("FAIL TO LOAD",error);
+             });
+         }
+
+         function saveGroupUser(groupUser){
+             return $http.post('http://localhost:9090/groupUsers',groupUser).then(function(response){
+                 console.log("GroupUser",response);
              },function (error){
                  console.log("FAIL TO LOAD",error);
              });

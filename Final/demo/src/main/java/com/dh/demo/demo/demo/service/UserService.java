@@ -27,6 +27,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getMaxId (){
+        String hql="select max(u.id) from User u";
+        List<User>users= entityManager.createQuery(hql).getResultList();
+        return users;
+    }
+
     public List<User> getAllUsersActive(){
         String hql="select u from User u where u.status='Active'";
         List<User>users=entityManager.createQuery(hql).getResultList();
@@ -52,9 +58,15 @@ public class UserService {
     }
 
     public void deleteUser (Long id){
+        String status = "Remove";
         User res = userRepository.findOne(id);
-        res.setStatus("remove");
-        //userRepository.delete(id);
+        res.setStatus(status);
+        res.setPassword(res.getPassword());
+        res.setEmail(res.getEmail());
+        res.setFirstname(res.getFirstname());
+        res.setLastname(res.getLastname());
+        res.setUsername(res.getUsername());
+        userRepository.save(res);
     }
 
     public User updateUser(Long id, UserController.UserRequestDTO user){

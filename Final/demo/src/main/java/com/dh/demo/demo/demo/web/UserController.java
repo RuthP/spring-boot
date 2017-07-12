@@ -37,7 +37,8 @@ public class UserController {
     public void addUser(@RequestBody UserRequestDTO user){
         userService.addUser(user);
     }
-    @RequestMapping(value = "/deleteUser/{id}",method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/deleteUser/{id}",method = RequestMethod.POST)
     public void deleteUser (@PathVariable Long id){
         userService.deleteUser(id);
     }
@@ -45,6 +46,11 @@ public class UserController {
     @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
     public User updateUser (@PathVariable Long id,@RequestBody UserRequestDTO user ){
         return userService.updateUser(id,user);
+    }
+
+    @RequestMapping(value = "/maxId",method = RequestMethod.GET)
+    public List<User> getMaxId (){
+        return userService.getMaxId();
     }
 
     public static class  UserRequestDTO{

@@ -32,7 +32,6 @@ public class GroupUserController {
         groupUserService.addGroupUser(groupUserRequestDTO);
     }
 
-
     public static class GroupUserRequestDTO{
         private Long groupId;
         private Long userId;

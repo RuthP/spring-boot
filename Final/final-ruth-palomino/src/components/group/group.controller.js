@@ -9,8 +9,11 @@
     function GroupController(groupService,loginService,$state,$stateParams,$http,$scope) {
         var vm = this;
         vm.groups = [];
-        vm.user = [];
+        vm.users = [];
         vm.idUser = localStorage.getItem("IdUser");
+        vm.idGroup = null;
+        vm.GroupUser = null;
+        vm.idUserList = null;
         //localStorage.clear(); //Para borrar datos
         vm.groupEdit = null;
         console.log("IDINGROUP",vm.idUser);
@@ -96,8 +99,71 @@
             });
         };
         vm.seeUsers = function(id){
-            return $http.get("")
-        }
+            vm.users= groupService.getUsersGroup(id).then(function(data){
+                vm.users=data;
+                vm.enable = "3";
+                vm.enableTable = "1";
+                vm.idGroup=id;
+                console.log("SEE",vm.users);
+            });
+            
+        };
+        vm.saveUser = function(){
+            var user = {
+                email:vm.email,
+                firstName:vm.fisrtName,
+                lastName:vm.lastName,
+                password:vm.password,
+                status:"Active",
+                userName:vm.userName
+            };
+            console.log("SAVEUSER",user);
+            return $http.post('http://localhost:9090/users',user).then(function(data){
+                var id = vm.idGroup;
+                var idNewUser = groupService.getMaxUser().then(function(data){
+                    var idNewUser = data[0];
+                    console.log("NEWUSER",idNewUser);
+                    console.log("GROUP"+id+"USER"+idNewUser);
+
+                    var groupUser = {
+                    groupId : id,
+                    userId :idNewUser
+                    };
+                    console.log("GGGGGGGGGGGGG",groupUser);
+                    vm.GroupUser = groupService.saveGroupUser(groupUser).then(function(data){
+                        console.log('GROUPUSER',data);
+                    });
+                });
+                var idG = vm.idGroup;
+                vm.users= groupService.getUsersGroup(idG).then(function(data){
+                    vm.users=data;
+                    vm.enable = "3";
+                    vm.enableTable = "1";
+                    vm.idGroup=id;
+                    //console.log("SAVEUSER",vm.users);
+                });
+            }, function error(response) {
+                 console.log('ERROR SAVEUSER', response);
+            });
+        };
+        vm.deleteUser = function(id){
+            //alert(id);
+            return $http.delete("http://localhost:9090/users/deleteUser/"+id).then(function(response){
+                 console.log("DELETE",response);
+                 var idOwner = vm.idUser;
+                 var idG = vm.idGroup;
+
+                vm.users= groupService.getUsersGroup(idG).then(function(data){
+                vm.users=data;
+                vm.enable = "3";
+                vm.enableTable = "1";
+                vm.idGroup=id;
+                console.log("DELETE",vm.users);
+                });
+            }, function error(response) {
+                 console.log('ERROR DELETE GROUP', response);
+            });
+        };
         vm.$onInit = function (){
             var id = vm.idUser;
             vm.groups = groupService.getGroups(id).then(function(data){
