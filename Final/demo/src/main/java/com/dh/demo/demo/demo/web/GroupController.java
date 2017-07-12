@@ -39,8 +39,8 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/makeOwner/{idUser}/{idGroup}",method = RequestMethod.GET)
-    public void makeOwner (@PathVariable long idUser,@PathVariable Long idGroup ){
-        groupService.makeOwner(idUser,idGroup);
+    public Group makeOwner (@PathVariable long idUser,@PathVariable long idGroup,@RequestBody GroupRequestDTO group){
+        return groupService.makeOwner(idUser,group,idGroup);
     }
 
     @RequestMapping(value = "{id}",method = RequestMethod.GET)

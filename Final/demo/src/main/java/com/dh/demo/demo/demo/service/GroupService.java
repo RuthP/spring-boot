@@ -76,17 +76,21 @@ public class GroupService {
     }
 
     public void deleteGroup (Long id){
-        String hql="delete from GroupUser gu where  gu.group =  "+id+"";
-        List<GroupUser>delete=entityManager.createQuery(hql).getResultList();
+        /*String hql="delete from GroupUser gu where  gu.group =  "+id+"";
+        List<GroupUser>delete=entityManager.createQuery(hql).executeUpdate();*/
         groupRepository.delete(id);
     }
 
-    public void makeOwner (Long idUser, Long idGroup){
+    public Group makeOwner(Long idUser, GroupController.GroupRequestDTO group, long idGroup) {
         User newOwner = userRepository.findOne(idUser);
-        Group group = groupRepository.findOne(idGroup);
-        group.setOwner(newOwner);
+        Group group1 = groupRepository.findOne(idGroup);
+        group1.setLogo(group.getLogo());
+        group1.setCreatedate(group.getCreate_date());
+        group1.setName(group.getName());
+        group1.setOwner(newOwner);
+        Group res = groupRepository.save(group1);
+        return res;
     }
-
     public Group updateGroup(Long id, GroupController.GroupRequestDTO group){
         Group group1 = groupRepository.findOne(id);
         User user = userRepository.findOne(group.getOwnerId());

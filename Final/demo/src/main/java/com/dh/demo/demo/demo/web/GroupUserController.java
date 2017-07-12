@@ -5,10 +5,7 @@ import com.dh.demo.demo.demo.domain.GroupUser;
 import com.dh.demo.demo.demo.domain.User;
 import com.dh.demo.demo.demo.service.GroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.ManyToOne;
 import java.util.List;
@@ -30,6 +27,11 @@ public class GroupUserController {
     @RequestMapping(method = RequestMethod.POST)
     public void addGroupUser (@RequestBody GroupUserRequestDTO groupUserRequestDTO){
         groupUserService.addGroupUser(groupUserRequestDTO);
+    }
+
+    @RequestMapping(value = "/deleteGroupUser/{id}",method = RequestMethod.DELETE)
+    public void deleteGroupUser(@PathVariable Long id){
+        groupUserService.deleteGroupUser(id);
     }
 
     public static class GroupUserRequestDTO{

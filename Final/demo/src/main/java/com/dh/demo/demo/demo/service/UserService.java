@@ -57,16 +57,17 @@ public class UserService {
         userRepository.save(res);
     }
 
-    public void deleteUser (Long id){
+    public User deleteUser(Long id, UserController.UserRequestDTO user){
         String status = "Remove";
-        User res = userRepository.findOne(id);
-        res.setStatus(status);
-        res.setPassword(res.getPassword());
-        res.setEmail(res.getEmail());
-        res.setFirstname(res.getFirstname());
-        res.setLastname(res.getLastname());
-        res.setUsername(res.getUsername());
-        userRepository.save(res);
+        User user1 = userRepository.findOne(id);
+        user1.setFirstname(user.getFirstName());
+        user1.setLastname(user.getLastName());
+        user1.setEmail(user.getEmail());
+        user1.setStatus(status);
+        user1.setUsername(user.getUserName());
+        user1.setPassword(user.getPassword());
+        User res = userRepository.save(user1);
+        return res;
     }
 
     public User updateUser(Long id, UserController.UserRequestDTO user){

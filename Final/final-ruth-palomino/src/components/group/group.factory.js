@@ -58,7 +58,7 @@
          function getUser(id){
              console.log("ID",id);
              return $http.get('http://localhost:9090/users/group/'+id).then(function(response){
-                 console.log("User by groups",response);
+                 console.log("users by groups",response);
                  return response.data;
              },function (error){
                  console.log("FAIL TO LOAD",error);

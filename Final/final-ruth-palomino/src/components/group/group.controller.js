@@ -16,6 +16,8 @@
         vm.idUserList = null;
         //localStorage.clear(); //Para borrar datos
         vm.groupEdit = null;
+        vm.userEdit = null;
+        vm.userDelete = null;
         console.log("IDINGROUP",vm.idUser);
         vm.enable = "0";
         vm.enableTable = "0";
@@ -28,6 +30,8 @@
                 return true;
             }
         };
+
+        //Save Group
         vm.save = function(){
              var group = {
                 createdate:new Date(),
@@ -52,6 +56,8 @@
 
             
         };
+
+        // Get Group to update
         vm.getGroup = function(id){
             return $http.get("http://localhost:9090/groups/"+id).then(function(response){
                 //console.log("RESPONSE UPDATE HTTP",response);
@@ -62,6 +68,7 @@
             });
         };
 
+        //Update Group
         vm.updateGroup = function(){
             var id = vm.groupEdit.id;
             //console.log("IDDD",vm.groupEdit.id);
@@ -85,6 +92,8 @@
               console.log("ERROR",response);       
             });
         };
+
+        //Delete Group
         vm.deleteGroup = function(id){
             //alert(id);
             return $http.delete("http://localhost:9090/groups/deleteGroup/"+id).then(function(response){
@@ -98,6 +107,8 @@
                  console.log('ERROR DELETE GROUP', response);
             });
         };
+
+        //See user from group
         vm.seeUsers = function(id){
             vm.users= groupService.getUsersGroup(id).then(function(data){
                 vm.users=data;
@@ -108,6 +119,46 @@
             });
             
         };
+
+        vm.getUser = function(idUser){
+          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
+                console.log("getUser",response);
+                var id = vm.idGroup;
+                vm.userEdit=response.data;
+                vm.enable="4";
+                //vm.seeUsers(id);
+            }, function error(response) {
+                console.log("ERROR",response);    
+            });
+        };
+
+        vm.getUserDelete = function(idUser){
+          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
+                console.log("getUser",response);
+                var id = vm.idGroup;
+                vm.userDelete=response.data;
+                //vm.enable="4";
+                //vm.seeUsers(id);
+            }, function error(response) {
+                console.log("ERROR",response);    
+            });
+        };
+
+
+        vm.updateUser = function(){
+          var id = vm.userEdit.id;
+          var user = {
+            email: vm.userEdit.email,
+            firstname: vm.userEdit.firstname,
+            lastname: vm.userEdit.lastname,
+            username: vm.userEdit.username,
+            status:"Active"
+
+          }
+          console.log("UPDATEUSER",user);
+        };
+
+        //save user from group
         vm.saveUser = function(){
             var user = {
                 email:vm.email,
@@ -118,7 +169,7 @@
                 userName:vm.userName
             };
             console.log("SAVEUSER",user);
-            return $http.post('http://localhost:9090/users',user).then(function(data){
+            return $http.post('http://localhost:9090/users',user).then(function(response){
                 var id = vm.idGroup;
                 var idNewUser = groupService.getMaxUser().then(function(data){
                     var idNewUser = data[0];
@@ -129,37 +180,32 @@
                     groupId : id,
                     userId :idNewUser
                     };
-                    console.log("GGGGGGGGGGGGG",groupUser);
+                    //console.log("GGGGGGGGGGGGG",groupUser);
                     vm.GroupUser = groupService.saveGroupUser(groupUser).then(function(data){
                         console.log('GROUPUSER',data);
+                        vm.seeUsers(id);
                     });
                 });
-                var idG = vm.idGroup;
-                vm.users= groupService.getUsersGroup(idG).then(function(data){
-                    vm.users=data;
-                    vm.enable = "3";
-                    vm.enableTable = "1";
-                    vm.idGroup=id;
-                    //console.log("SAVEUSER",vm.users);
-                });
+                return response.data;
             }, function error(response) {
                  console.log('ERROR SAVEUSER', response);
             });
         };
         vm.deleteUser = function(id){
             //alert(id);
-            return $http.delete("http://localhost:9090/users/deleteUser/"+id).then(function(response){
-                 console.log("DELETE",response);
-                 var idOwner = vm.idUser;
-                 var idG = vm.idGroup;
+            var user = {
+            email: vm.userDelete.email,
+            firstname: vm.userDelete.firstname,
+            lastname: vm.userDelete.lastname,
+            username: vm.userDelete.username,
+            status:"Remove"
 
-                vm.users= groupService.getUsersGroup(idG).then(function(data){
-                vm.users=data;
-                vm.enable = "3";
-                vm.enableTable = "1";
-                vm.idGroup=id;
-                console.log("DELETE",vm.users);
-                });
+          }
+            return $http.delete("http://localhost:9090/users/deleteUser/"+id,user).then(function(response){
+                 console.log("DELETE",response);
+                 //var idOwner = vm.idUser;
+                 var idG = vm.idGroup;
+                 vm.seeUsers(idG);
             }, function error(response) {
                  console.log('ERROR DELETE GROUP', response);
             });

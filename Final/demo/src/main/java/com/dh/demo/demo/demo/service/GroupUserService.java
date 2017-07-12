@@ -30,6 +30,10 @@ public class GroupUserService {
         return groupUserRepository.findAll();
     }
 
+    public void deleteGroupUser (Long id){
+        groupRepository.delete(id);
+    }
+
     public void addGroupUser (GroupUserController.GroupUserRequestDTO groupUser){
         User user = userRepository.findOne(groupUser.getUserId());
         Group group = groupRepository.findOne(groupUser.getGroupId());

@@ -66,32 +66,33 @@
                 </div>
                 <br>
                 <div class="form-user">
-                <button type="submit" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-success" onclick="this.form.reset()">Save</button>
                 </div>
         </form>
        </div>
 
        <div ng-if="$ctrl.enable=='4'"> 
-        <form ng-submit="$ctrl.()">
-          
+        <form ng-submit="$ctrl.updateUser()">
+                
+                <input  type="hidden"  ng-model="$ctrl.userEdit.id" ng-model-options="{ updateOn: '{{$ctrl.userEdit.id}}' }" class="form-control">
                 <div class="form-user">
-                <label for="firstName">First Name</label>
-                <input type="text" ng-model="$ctrl.fisrtName" class="form-control" id="fisrtName" placeholder="firts name">
+                <label for="firstName">Edit First Name</label>
+                <input type="text" ng-value="'{{$ctrl.userEdit.firstname}}'" ng-model="$ctrl.userEdit.firstname" class="form-control" id="editFirstname">
                 </div>
                 <div class="form-user">
-                <label for="lastName">Last Name</label>
-                <input type="text" ng-model="$ctrl.lastName" class="form-control" id="lastName" placeholder="last name">
+                <label for="lastName">Edit Last Name</label>
+                <input type="text" ng-value="'{{$ctrl.userEdit.lastname}}'" ng-model="$ctrl.userEdit.lastname" class="form-control" id="editlastName" placeholder="last name">
                 </div>
                 <div class="form-user">
                 <label for="email">Email</label>
-                <input type="email" ng-model="$ctrl.email" class="form-control" id="email" placeholder="">
+                <input type="email" ng-value="'{{$ctrl.userEdit.email}}'" ng-model="$ctrl.userEdit.email" class="form-control" id="editEmail" placeholder="">
                 </div>
                 <div class="form-user">
                 <label for="userName">User Name</label>
-                <input type="text" ng-model="$ctrl.userName" class="form-control" id="userName" placeholder="">
+                <input type="text"  ng-value="'{{$ctrl.userEdit.username}}'" ng-model="$ctrl.userEdit.username" class="form-control" id="editUserName" placeholder="">
                 </div>
                 <div class="form-user">
-                <button ng-click="areEmptyFields()" type="submit" class="btn btn-success">Save</button>
+                <button ng-click="areEmptyFields()" type="submit" class="btn btn-success">Update</button>
                 </div>
         </form>
        </div>
@@ -138,8 +139,8 @@
                 <td>{{user.lastname}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.username}}</td>
-                <td><button type="submit" class="btn btn-primary" ng-click="$ctrl.seeUsers(group.id)">Add User</button></td>
-                <td><button type="submit" class="btn btn-warning" ng-click="$ctrl.getGroup(group.id)">Edit User</button></td>
+                <!--td><button type="submit" class="btn btn-primary" ng-click="$ctrl.seeUsers(group.id)">Add User</button></td-->
+                <td><button type="submit" class="btn btn-warning" ng-click="$ctrl.getUser(user.id)">Edit User</button></td>
                 <td><button type="submit" class="btn btn-danger"  ng-click="$ctrl.deleteUser(user.id)">Delete User</button></td>               
                 </tr>
         </tbody>        
