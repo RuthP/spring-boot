@@ -51,12 +51,12 @@
          }
 
          function getUsersGroup(id){
-             console.log("iddd",id);
+             console.log("idGroup",id);
              return getUser(id);
          }
 
          function getUser(id){
-             console.log("ID",id);
+             console.log("idGroup",id);
              return $http.get('http://localhost:9090/users/group/'+id).then(function(response){
                  console.log("users by groups",response);
                  return response.data;

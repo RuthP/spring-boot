@@ -75,8 +75,8 @@
            // alert("id",id);
             var group = {
                 createdate:new Date(),
-                logo : vm.groupEdit.name,
-                name : vm.groupEdit.logo,
+                logo : vm.groupEdit.logo,
+                name : vm.groupEdit.name,
                 ownerId : vm.idUser
             };
             console.log("UPDATE",group);
@@ -120,44 +120,6 @@
             
         };
 
-        vm.getUser = function(idUser){
-          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
-                console.log("getUser",response);
-                var id = vm.idGroup;
-                vm.userEdit=response.data;
-                vm.enable="4";
-                //vm.seeUsers(id);
-            }, function error(response) {
-                console.log("ERROR",response);    
-            });
-        };
-
-        vm.getUserDelete = function(idUser){
-          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
-                console.log("getUser",response);
-                var id = vm.idGroup;
-                vm.userDelete=response.data;
-                //vm.enable="4";
-                //vm.seeUsers(id);
-            }, function error(response) {
-                console.log("ERROR",response);    
-            });
-        };
-
-
-        vm.updateUser = function(){
-          var id = vm.userEdit.id;
-          var user = {
-            email: vm.userEdit.email,
-            firstname: vm.userEdit.firstname,
-            lastname: vm.userEdit.lastname,
-            username: vm.userEdit.username,
-            status:"Active"
-
-          }
-          console.log("UPDATEUSER",user);
-        };
-
         //save user from group
         vm.saveUser = function(){
             var user = {
@@ -191,7 +153,53 @@
                  console.log('ERROR SAVEUSER', response);
             });
         };
-        vm.deleteUser = function(id){
+
+        vm.getUser = function(idUser){
+          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
+                console.log("getUser",response);
+                var id = vm.idGroup;
+                vm.userEdit=response.data;
+                vm.enable="4";
+                //vm.seeUsers(id);
+            }, function error(response) {
+                console.log("ERROR",response);    
+            });
+        };
+
+        vm.updateUser = function(){
+          var id = vm.userEdit.id;
+          var user = {
+            email: vm.userEdit.email,
+            firstname: vm.userEdit.firstname,
+            lastname: vm.userEdit.lastname,
+            username: vm.userEdit.username,
+            status:"Active"
+
+          };
+          console.log("UPDATEUSER",user);
+          return $http.put("http://localhost:9090/users/updateUser/"+id,user).then(function(response){
+              var idG = vm.idGroup;
+              console.log("UPDATE",response);
+               vm.seeUsers(idG);
+            },function error(response){
+              console.log("ERROR",response);       
+            });
+        };
+
+        vm.getUserDelete = function(idUser){
+          return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
+                console.log("getUser",response);
+                var id = vm.idGroup;
+                vm.userDelete=response.data;
+                vm.deleteUser(idUser);
+                //vm.enable="4";
+                //vm.seeUsers(id);
+            }, function error(response) {
+                console.log("ERROR",response);    
+            });
+        };
+
+        vm.deleteUser = function(idUser){
             //alert(id);
             var user = {
             email: vm.userDelete.email,
@@ -200,8 +208,8 @@
             username: vm.userDelete.username,
             status:"Remove"
 
-          }
-            return $http.delete("http://localhost:9090/users/deleteUser/"+id,user).then(function(response){
+          };
+            return $http.put("http://localhost:9090/users/deleteUser/"+idUser,user).then(function(response){
                  console.log("DELETE",response);
                  //var idOwner = vm.idUser;
                  var idG = vm.idGroup;
