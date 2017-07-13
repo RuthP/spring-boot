@@ -11,6 +11,7 @@
         vm.groups = [];
         vm.users = [];
         vm.idUser = localStorage.getItem("IdUser");
+        vm.userNameLogin = localStorage.getItem("UserName");
         vm.idGroup = null;
         vm.GroupUser = null;
         vm.idUserList = null;
@@ -153,7 +154,7 @@
                  console.log('ERROR SAVEUSER', response);
             });
         };
-
+        //get user to update
         vm.getUser = function(idUser){
           return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
                 console.log("getUser",response);
@@ -166,18 +167,20 @@
             });
         };
 
+        //update user
         vm.updateUser = function(){
-          var id = vm.userEdit.id;
+          var idUserUpdate = vm.userEdit.id;
           var user = {
             email: vm.userEdit.email,
-            firstname: vm.userEdit.firstname,
-            lastname: vm.userEdit.lastname,
-            username: vm.userEdit.username,
-            status:"Active"
-
+            firstName: vm.userEdit.firstname,
+            lastName: vm.userEdit.lastname,
+            password: vm.userEdit.password,
+            status:"Active",
+            userName: vm.userEdit.username
           };
+
           console.log("UPDATEUSER",user);
-          return $http.put("http://localhost:9090/users/updateUser/"+id,user).then(function(response){
+          return $http.put("http://localhost:9090/users/updateUser/"+idUserUpdate,user).then(function(response){
               var idG = vm.idGroup;
               console.log("UPDATE",response);
                vm.seeUsers(idG);
@@ -186,6 +189,7 @@
             });
         };
 
+        //delete user
         vm.getUserDelete = function(idUser){
           return $http.get("http://localhost:9090/users/"+idUser).then(function(response){
                 console.log("getUser",response);

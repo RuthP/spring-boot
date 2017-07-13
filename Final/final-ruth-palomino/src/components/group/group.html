@@ -2,6 +2,7 @@
 <div ng-controller= "groupController as $ctrl">
    <br>
       <div ng-if="$ctrl.enable=='0'">
+      <h3>{{$ctrl.userNameLogin}}</h3>
       <article class="panel panel-info">       
       <header class="panel-heading">Group Form</header> 
         <form ng-submit="$ctrl.save()">
@@ -96,6 +97,11 @@
                 <input type="text"  ng-value="'{{$ctrl.userEdit.username}}'" ng-model="$ctrl.userEdit.username" class="form-control" id="editUserName" placeholder="">
                 </div>
                 <div class="form-user">
+                <label for="password">Edit Password</label>
+                <input type="text" ng-value="'{{$ctrl.userEdit.password}}'" ng-model="$ctrl.userEdit.password" class="form-control" id="editPassword" placeholder="*****">
+                </div>
+                <br>
+                <div class="form-user">
                 <button type="submit" class="btn btn-success" onclick="this.form.reset()">Update</button>
                 </div>
         </form>
@@ -120,7 +126,7 @@
                 <td><button type="submit" class="btn btn-primary" ng-click="$ctrl.seeUsers(group.id)">See Users</button></td>
                 <td><button type="submit" class="btn btn-warning" ng-click="$ctrl.getGroup(group.id)">Edit Group</button></td>
                 <td><button type="submit" class="btn btn-danger"  ng-click="$ctrl.deleteGroup(group.id)">Delete Group</button></td>
-                <td><button type="submit" class="btn-info"  ng-click="$ctrl.deleteGroup(group.id)">Go Chat</button></td>                 
+                <td><button type="submit" class="btn btn-info"  ng-click="$ctrl.deleteGroup(group.id)">Go Chat</button></td>                 
                 </tr>
         </tbody>        
         </table>
@@ -149,6 +155,7 @@
                 </tr>
         </tbody>        
         </table>
+        <div><button type="submit" class="btn btn-default" ng-click="$ctrl.getUser(user.id)">< Previous</button></div>
         </div>
 </div>
 </article>

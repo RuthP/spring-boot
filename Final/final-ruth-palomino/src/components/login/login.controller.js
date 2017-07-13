@@ -38,7 +38,7 @@
             if ($scope.stateUserName && $scope.statePassword) {
               $scope.displayMessage = false;
               $scope.validationUser = true;
-              localStorage.setItem("UerName", $scope.userName);
+              localStorage.setItem("UserName", $scope.userName);
               localStorage.setItem("IdUser", idUser1);
 
             if ($scope.validationUser) {
