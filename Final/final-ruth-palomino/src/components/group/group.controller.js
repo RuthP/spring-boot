@@ -32,6 +32,16 @@
             }
         };
 
+        vm.Previous = function(){
+            vm.enable = "0";
+            vm.enableTable = "0";
+        };
+
+        vm.chat = function(idGroup) {
+        $state.go('chat');
+        //console.log("UserLogin",userName1);
+        };
+
         //Save Group
         vm.save = function(){
              var group = {
