@@ -5,8 +5,19 @@
         .module('chat')
         .controller('messageItemController', MessageItemController);
 
-    MessageItemController.inject = ['$scope'];
-    function MessageItemController($scope) {
+    MessageItemController.inject = ['$scope', '$rootScope'];
+    function MessageItemController($scope, $rootScope) {
+        var vm = this;
         $scope.displayMessageItem = false;
+        vm.messageItem = 'prueba';
+
+        $rootScope.$on('messageChat', function(evt, message){
+            console.log(message);
+            vm.messageItem = message;
+            console.log("------>"+vm.messageItem);
+            $scope.$apply();
+        });
     }
+
+
 })();

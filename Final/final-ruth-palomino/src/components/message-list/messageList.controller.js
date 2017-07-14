@@ -11,10 +11,10 @@
         vm.messages = [];
 
         vm.$onInit = function (){
-            vm.messages = messageService.getMessages().then(function(data){
+           /* vm.messages = messageService.getMessages().then(function(data){
                 vm.messages=data.messages;
                 console.log("MESSAGES",vm.messages);
-            });
+            });*/
         };
     }
 })();
