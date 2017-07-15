@@ -11,7 +11,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
+        <!--div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="name">What is your name?</label>
@@ -19,14 +19,17 @@
                 </div>
                 <button id="send" class="btn btn-default" type="submit" ng-click="$ctrl.sendUserName()">Send</button>
             </form>
-        </div>
+        </div-->
     </div>
     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Group Name: {{$ctrl.usersGroupName}}</th>
+                </tr>
+                <tr>
+                    <th>Greetings: {{$ctrl.userChat.firstname}}{{" "}}{{$ctrl.userChat.lastname}}</th>
                 </tr>
                 </thead>
                 <tbody id="greetings">
@@ -34,26 +37,34 @@
             </table>
         </div>
     </div>
-    </form>
-</div>
 
   <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
+                <div class="panel-heading">Chat group:</div>
                 <div class="panel-body">
                     <message-list></message-list>
                     
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="panel panel-info">
+                <br>
+                <!--div class="panel-heading">Panel with panel-primary class</div-->
+                <!--div class="panel-body">
                     <message-area></message-area>
-                </div>
+                </div-->
+                    <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" id="name" class="form-control" ng-model="$ctrl.userName" placeholder="Your message here...">
+                    </div>
+                    <button id="send" class="btn btn-default" type="submit" ng-click="$ctrl.sendUserName()" onclick="this.form.reset()">Send</button>
+                    </form>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
+                <div class="panel-heading">Users</div>
                 <div class="panel-body">
                     <user-list></user-list>
                 </div>
@@ -61,4 +72,5 @@
         </div>
     </div>
   </div>
+ </div>
 </div>

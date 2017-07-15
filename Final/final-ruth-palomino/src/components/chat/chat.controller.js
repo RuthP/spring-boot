@@ -4,15 +4,20 @@
     .module('chat')
     .controller('chatController',chatController);
 
-    chatController.inject = ['$scope', '$rootScope'];
-    function chatController($scope, $rootScope){
+    chatController.inject = ['$scope', '$rootScope','groupService','$http'];
+    function chatController($scope, $rootScope,groupService,$http){
         var vm = this;
         
-        vm.userName = "Ruth";
+        vm.userName = "";
         vm.message = '';
         vm.connectToChat = connectToChat;
         vm.disconnect = disconnect;
         vm.sendUserName = sendUserName;
+        vm.usersGroupName = localStorage.getItem("GroupName");
+        vm.usersIdChat= localStorage.getItem("IdUser");
+        vm.userChat='';
+        console.log("GROUP NAME",vm.usersGroupName);
+        console.log("IDCHAT",vm.usersIdChat);
 
         $scope.displayMessage = false;
 
@@ -25,7 +30,17 @@
             $scope.displayMessage = false;
             return false;
         };
-
+        vm.$onInit = function (){
+          //vm.getUser = function(idUser){
+          return $http.get("http://localhost:9090/users/"+vm.usersIdChat).then(function(response){
+                console.log("getUser",response);
+                vm.userChat=response.data;
+                //vm.seeUsers(id);
+            }, function error(response) {
+                console.log("ERROR",response);    
+            });
+         //};
+        };
        function connectToChat(){
            var socket = new SockJS('http://localhost:9090/chat-ws');
            stompClient = Stomp.over(socket);
@@ -40,6 +55,7 @@
        }
 
        function showGreeting(message){
+           console.log("message",message);
             $rootScope.$broadcast('messageChat', message);
             vm.message = message;
        }
@@ -53,6 +69,7 @@
        }
 
        function sendUserName(){
+           //console.log("SEND",vm.userName);
             stompClient.send("/app/hello", {}, JSON.stringify({'name': vm.userName}));
        }
 

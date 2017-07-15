@@ -5,8 +5,8 @@
         .module('chat')
         .controller('groupController', GroupController);
 
-    GroupController.inject = ['groupService','loginService','$state','$stateParams','$http','$scope'];
-    function GroupController(groupService,loginService,$state,$stateParams,$http,$scope) {
+    GroupController.inject = ['groupService','loginService','$state','$stateParams','$http','$scope', '$rootScope'];
+    function GroupController(groupService,loginService,$state,$stateParams,$http,$scope,$rootScope) {
         var vm = this;
         vm.groups = [];
         vm.users = [];
@@ -37,9 +37,11 @@
             vm.enableTable = "0";
         };
 
-        vm.chat = function(idGroup) {
-        $state.go('chat');
-        //console.log("UserLogin",userName1);
+        vm.chat = function(groupName) {
+         console.log("UserLogin",groupName);   
+         localStorage.setItem("GroupName", groupName);
+         localStorage.setItem("IdUser", vm.idUser);
+         $state.go('chat');
         };
 
         //Save Group
