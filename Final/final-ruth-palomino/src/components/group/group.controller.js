@@ -15,6 +15,7 @@
         vm.idGroup = null;
         vm.GroupUser = null;
         vm.idUserList = null;
+        vm.isOwner = '';
         //localStorage.clear(); //Para borrar datos
         vm.groupEdit = null;
         vm.userEdit = null;
@@ -40,6 +41,7 @@
         vm.chat = function(groupName) {
          console.log("UserLogin",groupName);   
          localStorage.setItem("GroupName", groupName);
+         //localStorage.setItem("IdGroup", vm.idGroup);
          localStorage.setItem("IdUser", vm.idUser);
          $state.go('chat');
         };
@@ -234,13 +236,35 @@
                  console.log('ERROR DELETE GROUP', response);
             });
         };
+
         vm.$onInit = function (){
             var id = vm.idUser;
             vm.groups = groupService.getGroups(id).then(function(data){
                 vm.groups=data;
                 console.log("GROUPSS",vm.groups);
             });
-        };
+
+            return $http.get("http://localhost:9090/groups/isOwner/"+id).then(function(response){
+                 //console.log("TRUE OR FALSE",response);
+                 
+                  if(response.data===false){
+                    //console.log("FALSE","0");
+                    vm.isOwner = "0";
+                    $scope.$apply();
+                  }else {
+                    //console.log("TRUE","1"); 
+                    vm.isOwner = "1";
+                    $scope.$apply();
+                  }
+                 console.log("TRUE OR FALSE",vm.isOwner);
+                 //return vm.isOwner;
+             },function (error){
+                 console.log("FAIL TO LOAD",error);
+             });
+            
+        }; 
+
+        console.log("asasas",vm.isOwner);
             
     }
 })();

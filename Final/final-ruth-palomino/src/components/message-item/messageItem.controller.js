@@ -9,7 +9,7 @@
     function MessageItemController($scope, $rootScope) {
         var vm = this;
         $scope.displayMessageItem = false;
-        vm.messageItem = 'prueba';
+        vm.messageItem = '';
 
         $rootScope.$on('messageChat', function(evt, message){
             console.log(message);

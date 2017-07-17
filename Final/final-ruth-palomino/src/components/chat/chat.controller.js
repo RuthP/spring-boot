@@ -4,8 +4,8 @@
     .module('chat')
     .controller('chatController',chatController);
 
-    chatController.inject = ['$scope', '$rootScope','groupService','$http'];
-    function chatController($scope, $rootScope,groupService,$http){
+    chatController.inject = ['$scope', '$rootScope','groupService','$http','$state'];
+    function chatController($scope, $rootScope,groupService,$http,$state){
         var vm = this;
         
         vm.userName = "";
@@ -15,6 +15,7 @@
         vm.sendUserName = sendUserName;
         vm.usersGroupName = localStorage.getItem("GroupName");
         vm.usersIdChat= localStorage.getItem("IdUser");
+        vm.GroupId= localStorage.getItem("IdGroup");
         vm.userChat='';
         console.log("GROUP NAME",vm.usersGroupName);
         console.log("IDCHAT",vm.usersIdChat);
@@ -30,6 +31,15 @@
             $scope.displayMessage = false;
             return false;
         };
+
+        vm.group = function(groupName) {
+         console.log("UserLogin",groupName);   
+         //localStorage.setItem("GroupName", groupName);
+         localStorage.setItem("GroupId", vm.GroupId);
+         localStorage.setItem("IdUser", vm.idUser);
+         $state.go('group');
+        };
+
         vm.$onInit = function (){
           //vm.getUser = function(idUser){
           return $http.get("http://localhost:9090/users/"+vm.usersIdChat).then(function(response){
